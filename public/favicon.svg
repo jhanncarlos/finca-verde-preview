@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Finca Verde">
+  <circle cx="64" cy="64" r="60" fill="#173f2b"/>
+  <path d="M37 70 64 42l27 28v28H72V78H56v20H37V70Z" fill="#f8f6ef"/>
+  <circle cx="42" cy="47" r="8" fill="none" stroke="#d8e5c9" stroke-width="7"/>
+  <path d="M49 47h28m-7 0v10m-10-10v8" stroke="#d8e5c9" stroke-width="7" stroke-linecap="round"/>
+</svg>

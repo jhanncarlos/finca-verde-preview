@@ -1,0 +1,696 @@
+---
+import '../styles/global.css';
+import properties from '../data/properties.json';
+
+const whatsappUrl =
+  'https://wa.me/51923529731?text=Hola%20Finca%20Verde%2C%20quiero%20asesor%C3%ADa%20para%20mi%20propiedad';
+
+const services = [
+  {
+    title: 'Venta de propiedades',
+    description: 'Preparamos, publicamos y negociamos tu propiedad con una estrategia clara desde el primer día.',
+    icon: '/icons/propiedades.png',
+    iconAlt: 'Icono de propiedades de Finca Verde',
+  },
+  {
+    title: 'Tasación comercial',
+    description: 'Definimos un precio competitivo con lectura de mercado, zona, metraje y potencial real.',
+    icon: '/icons/proceso-llaves.png',
+    iconAlt: 'Icono de proceso y llaves de Finca Verde',
+  },
+  {
+    title: 'Gestión de trámites',
+    description: 'Te acompañamos con documentos, filtros, visitas, negociación y cierre seguro.',
+    icon: '/icons/equipo-cierre.png',
+    iconAlt: 'Icono de cierre con llaves de Finca Verde',
+  },
+  {
+    title: 'Búsqueda para compra',
+    description: 'Seleccionamos oportunidades que encajen con tu presupuesto, estilo de vida e inversión.',
+    icon: '/icons/cierres-llaves.png',
+    iconAlt: 'Icono de búsqueda de llaves de Finca Verde',
+  },
+];
+
+const process = [
+  {
+    step: '01',
+    title: 'Evaluamos',
+    description: 'Conocemos la propiedad, revisamos documentación base y estimamos su valor comercial.',
+    detail: 'La primera etapa evita salir al mercado con un precio improvisado o información incompleta.',
+    deliverables: ['Revisión comercial', 'Lectura de zona', 'Checklist documental'],
+  },
+  {
+    step: '02',
+    title: 'Preparamos',
+    description: 'Ordenamos fotos, información, argumentos de venta y plan de promoción.',
+    detail: 'Convertimos el inmueble en una propuesta clara: qué se vende, para quién es ideal y cómo se presentará.',
+    deliverables: ['Ficha del inmueble', 'Argumentos de venta', 'Plan de visitas'],
+  },
+  {
+    step: '03',
+    title: 'Promocionamos',
+    description: 'Activamos redes, portales, base de clientes y seguimiento a interesados calificados.',
+    detail: 'No se trata de publicar por publicar: filtramos interesados y damos seguimiento para generar visitas útiles.',
+    deliverables: ['Difusión comercial', 'Filtro de prospectos', 'Reporte de avances'],
+  },
+  {
+    step: '04',
+    title: 'Cerramos',
+    description: 'Acompañamos la negociación, firma y entrega para que avances con tranquilidad.',
+    detail: 'Cuidamos la negociación y el orden de cierre para reducir fricciones hasta la entrega.',
+    deliverables: ['Negociación guiada', 'Coordinación documental', 'Acompañamiento final'],
+  },
+];
+
+const faqs = [
+  ['¿Cuánto demora vender una propiedad?', 'Depende del precio, documentación, zona y demanda. El objetivo es salir con una estrategia realista para acelerar visitas y negociaciones.'],
+  ['¿Puedo vender si aún faltan documentos?', 'Sí. Primero revisamos el caso y definimos qué debe regularizarse antes o durante el proceso.'],
+  ['¿La evaluación inicial tiene costo?', 'La primera conversación y revisión comercial se plantea como punto de partida para saber si podemos ayudarte.'],
+  ['¿También trabajan alquileres?', 'Sí. La prioridad de comunicación es venta segura, pero también se puede armar gestión para alquiler según el inmueble.'],
+];
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Finca Verde Inmobiliaria te acompaña a vender, alquilar o encontrar una propiedad con una gestión rápida, segura y cercana en Lima."
+    />
+    <meta name="generator" content={Astro.generator} />
+    <title>Finca Verde Inmobiliaria | Vende rápido y seguro</title>
+  </head>
+  <body class="bg-[#f8f6ef] text-[#173f2b]">
+    <header class="fixed inset-x-0 top-0 z-50 border-b border-white/20 bg-[#173f2b]/92 text-white backdrop-blur-xl">
+      <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8" aria-label="Principal">
+        <a href="#inicio" class="flex items-center" aria-label="Finca Verde inicio">
+          <img
+            class="h-14 w-auto object-contain sm:h-16"
+            src="/logo-finca-verde-transparent.png"
+            alt="Finca Verde Inmobiliaria"
+          />
+        </a>
+        <button
+          class="menu-button inline-flex size-11 items-center justify-center rounded-full border border-white/20 lg:hidden"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-menu-button
+        >
+          <span class="sr-only">Abrir menú</span>
+          <span class="menu-line"></span>
+        </button>
+        <div class="hidden items-center gap-8 text-sm font-medium text-white/82 lg:flex">
+          <a href="#propiedades" class="hover:text-white">Propiedades</a>
+          <a href="#servicios" class="hover:text-white">Servicios</a>
+          <a href="#proceso" class="hover:text-white">Proceso</a>
+          <a href="#testimonios" class="hover:text-white">Testimonios</a>
+          <a href="#faq" class="hover:text-white">Q&A</a>
+          <a class="rounded-full bg-white px-5 py-2.5 text-[#173f2b] shadow-sm transition hover:bg-[#d8e5c9]" href={whatsappUrl}>
+            WhatsApp
+          </a>
+        </div>
+      </nav>
+      <div id="mobile-menu" class="hidden border-t border-white/10 bg-[#173f2b] px-5 py-5 text-white" data-menu>
+        <div class="mx-auto grid max-w-7xl gap-4 text-sm">
+          <a href="#propiedades">Propiedades</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#proceso">Proceso</a>
+          <a href="#testimonios">Testimonios</a>
+          <a href="#faq">Q&A</a>
+          <a class="mt-2 rounded-full bg-white px-5 py-3 text-center font-semibold text-[#173f2b]" href={whatsappUrl}>Hablar por WhatsApp</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero-section relative isolate min-h-[92vh] overflow-hidden bg-[#173f2b] pt-28 text-white">
+        <img
+          class="absolute inset-0 -z-20 h-full w-full object-cover"
+          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2200&q=85"
+          alt="Sala luminosa de una propiedad lista para vender"
+        />
+        <div class="hero-overlay absolute inset-0 -z-10"></div>
+        <div class="hero-warmth absolute inset-x-0 bottom-0 -z-10 h-48"></div>
+        <div class="mx-auto grid max-w-7xl gap-12 px-5 pb-20 pt-16 lg:grid-cols-[1.02fr_.78fr] lg:px-8 lg:pb-28 lg:pt-24">
+          <div class="max-w-3xl">
+            <h1 class="text-balance text-5xl font-semibold leading-[0.98] tracking-normal sm:text-6xl lg:text-7xl" data-hero-title>
+              Vende tu propiedad rápido y seguro.
+            </h1>
+            <p class="mt-7 max-w-2xl text-lg leading-8 text-white/78" data-hero-copy>
+              En Finca Verde te acompañamos desde la valorización hasta el cierre, con una gestión cercana, ordenada y enfocada en propietarios que quieren avanzar con confianza.
+            </p>
+            <div class="audience-shell mt-7 grid grid-cols-2 rounded-full p-1" aria-label="Elegir objetivo">
+              <button class="audience-toggle is-active" type="button" data-audience="seller">Quiero vender</button>
+              <button class="audience-toggle" type="button" data-audience="buyer">Estoy buscando</button>
+            </div>
+          </div>
+          <aside class="hero-search self-end rounded-[2rem] border border-white/55 bg-white/82 p-5 text-[#173f2b] shadow-2xl shadow-black/18 backdrop-blur-xl">
+            <div class="grid gap-3" data-hero-search>
+              <div class="hero-operation-tabs grid rounded-full bg-[#edf3e6] p-1" data-hero-operation-tabs>
+                <button class="hero-search-tab" type="button" data-hero-operation="venta" data-audience-options="buyer">Compra</button>
+                <button class="hero-search-tab" type="button" data-hero-operation="alquiler" data-audience-options="buyer">Alquiler</button>
+                <button class="hero-search-tab is-active" type="button" data-hero-operation="tasar" data-audience-options="seller">Tasar</button>
+              </div>
+              <label class="hero-search-field">
+                <span>Distrito</span>
+                <select data-hero-district>
+                  <option value="all">Todos los distritos</option>
+                  {[...new Set(properties.map((property) => property.district))].map((district) => (
+                    <option value={district}>{district}</option>
+                  ))}
+                </select>
+              </label>
+              <label class="hero-search-field">
+                <span>Tipo</span>
+                <select data-hero-type>
+                  <option value="all">Todo tipo</option>
+                  <option value="departamento">Departamento</option>
+                  <option value="casa">Casa</option>
+                  <option value="oficina">Oficina</option>
+                </select>
+              </label>
+              <button class="hero-search-submit mt-2 rounded-full px-6 py-4 font-semibold transition" type="button" data-hero-search-submit>
+                Solicitar tasación
+              </button>
+            </div>
+            <p class="mt-4 text-sm leading-6 text-[#627263]">Si no aparece lo que buscas, Finca Verde puede ayudarte a encontrarlo.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section id="propiedades" class="bg-white py-20 lg:py-28" data-reveal>
+        <div class="mx-auto max-w-7xl px-5 lg:px-8">
+          <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div class="max-w-2xl">
+              <p class="section-kicker">Propiedades</p>
+              <h2 class="section-title">Inmuebles destacados para compradores listos.</h2>
+              <p class="mt-5 text-lg leading-8 text-[#627263]">
+                Catálogo ligero y actualizado con las oportunidades que el equipo está moviendo ahora.
+              </p>
+            </div>
+            <a class="rounded-full border border-[#173f2b]/18 px-6 py-3 font-semibold text-[#173f2b] transition hover:bg-[#173f2b] hover:text-white" href={whatsappUrl}>
+              Solicitar catálogo
+            </a>
+          </div>
+          <div class="hidden" aria-hidden="true">
+            <select data-property-filter="operation">
+              <option value="all">Todas</option>
+              <option value="venta">Venta</option>
+              <option value="alquiler">Alquiler</option>
+            </select>
+            <select data-property-filter="type">
+              <option value="all">Todos</option>
+              <option value="departamento">Departamento</option>
+              <option value="casa">Casa</option>
+              <option value="oficina">Oficina</option>
+            </select>
+            <select data-property-filter="district">
+              <option value="all">Todos</option>
+              {[...new Set(properties.map((property) => property.district))].map((district) => (
+                <option value={district}>{district}</option>
+              ))}
+            </select>
+          </div>
+          <div class="mt-10 flex items-center justify-between gap-4 text-sm text-[#627263]">
+            <p><span class="font-semibold text-[#173f2b]" data-property-count>{properties.length}</span> propiedades visibles</p>
+            <p class="hidden sm:block">Abre una ficha para consultar por WhatsApp.</p>
+          </div>
+          <div class="mt-8 grid gap-6 lg:grid-cols-3" data-property-grid>
+            {properties.map((property) => (
+              <article
+                class="property-card overflow-hidden rounded-3xl border border-[#dbe5d2] bg-[#fbfaf5] shadow-sm"
+                data-property-card
+                data-id={property.id}
+                data-operation={property.operation}
+                data-type={property.type}
+                data-district={property.district}
+              >
+                <button class="block w-full text-left" type="button" data-property-open={property.id} aria-label={`Ver ficha de ${property.title}`}>
+                  <span class="relative block overflow-hidden">
+                    <img class="h-72 w-full object-cover transition duration-500 hover:scale-105" src={property.image} alt={property.title} />
+                    <span class="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#173f2b]">{property.status}</span>
+                  </span>
+                </button>
+                <div class="p-6">
+                  <span class="text-sm font-semibold uppercase tracking-[0.18em] text-[#6e8a63]">{property.district}</span>
+                  <h3 class="mt-3 text-2xl font-semibold">{property.title}</h3>
+                  <p class="mt-3 text-[#627263]">{property.meta}</p>
+                  <div class="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-[#55705e]">
+                    <span class="rounded-full bg-[#edf3e6] px-3 py-1">{property.operation}</span>
+                    <span class="rounded-full bg-[#edf3e6] px-3 py-1">{property.type}</span>
+                  </div>
+                  <div class="mt-6 flex items-center justify-between gap-4">
+                    <strong class="text-lg">{property.price}</strong>
+                    <button class="rounded-full bg-[#173f2b] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#255d3f]" type="button" data-property-open={property.id}>
+                      Ver ficha
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div class="mt-10 hidden rounded-3xl border border-[#dbe5d2] bg-[#f8f6ef] p-8 text-center" data-empty-properties>
+            <h3 class="text-2xl font-semibold">No hay propiedades con esos filtros.</h3>
+            <p class="mt-3 text-[#627263]">Prueba otra combinación o pide una búsqueda personalizada por WhatsApp.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="servicios" class="py-20 lg:py-28" data-reveal>
+        <div class="mx-auto max-w-7xl px-5 lg:px-8">
+          <div class="max-w-2xl">
+            <p class="section-kicker">Nuestros servicios</p>
+            <h2 class="section-title">Todo lo que necesitas para mover una propiedad sin improvisar.</h2>
+          </div>
+          <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {services.map((service) => (
+              <article class="group rounded-3xl border border-[#dbe5d2] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-[#173f2b]/10">
+                <div class="service-card-head">
+                  <span class="service-icon">
+                    <img src={service.icon} alt={service.iconAlt} />
+                  </span>
+                  <h3 class="service-card-title">{service.title}</h3>
+                </div>
+                <p class="mt-3 leading-7 text-[#627263]">{service.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="proceso" class="process-section relative overflow-hidden bg-[#173f2b] py-14 text-white lg:py-16">
+        <div class="process-map" aria-hidden="true"></div>
+        <div class="city-line" aria-hidden="true"></div>
+        <div class="relative z-10 mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.82fr_1.18fr] lg:items-start lg:px-8">
+          <div>
+            <p class="section-kicker text-[#d8e5c9]">Proceso Finca Verde</p>
+            <h2 class="section-title max-w-xl text-white">Una ruta clara, sin improvisar.</h2>
+            <p class="mt-3 max-w-xl text-lg leading-8 text-white/72">
+              Ordenamos cada etapa para que sepas qué viene después, qué documentos necesitas y cómo se tomarán las decisiones importantes.
+            </p>
+            <div class="mt-5 border-l border-[#d8e5c9]/45 pl-6">
+              <p class="text-2xl font-semibold">De la primera evaluación al cierre.</p>
+              <p class="mt-3 max-w-md leading-7 text-white/68">Un asesor mantiene el orden del proceso para que cada avance tenga propósito comercial.</p>
+            </div>
+          </div>
+          <div class="rounded-[1.75rem] border border-white/12 bg-white/8 p-4 shadow-2xl shadow-black/10 backdrop-blur">
+            <div class="grid gap-2 sm:grid-cols-4" role="tablist" aria-label="Etapas del proceso">
+              {process.map((item, index) => (
+                <button
+                  class={`process-tab min-w-0 rounded-2xl px-2.5 py-4 text-center transition ${index === 0 ? 'is-active' : ''}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={index === 0 ? 'true' : 'false'}
+                  data-process-tab={index}
+                >
+                  <span class="process-tab-label block font-semibold leading-tight text-white">{item.title}</span>
+                </button>
+              ))}
+            </div>
+            <div class="process-panel-card mt-3 rounded-[1.5rem] bg-white p-6 text-[#173f2b]" data-process-panel>
+              <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <span class="text-sm font-semibold uppercase tracking-[0.18em] text-[#6e8a63]">¿Cómo lo hacemos?</span>
+                  <p class="process-detail mt-3 max-w-2xl text-xl leading-8 text-[#40573f]" data-process-detail>{process[0].detail}</p>
+                </div>
+                <img class="size-16 rounded-full object-cover" src="/icons/proceso-llaves.png" alt="Icono de proceso Finca Verde" />
+              </div>
+              <div class="process-deliverables mt-5 grid gap-3 sm:grid-cols-3" data-process-deliverables>
+                {process[0].deliverables.map((deliverable) => (
+                  <span class="process-deliverable grid place-items-center rounded-2xl bg-[#edf3e6] px-4 py-2.5 text-center text-sm font-semibold leading-tight">{deliverable}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonios" class="py-20 lg:py-28">
+        <div class="mx-auto max-w-7xl px-5 lg:px-8">
+          <p class="section-kicker">Clientes y testimonios</p>
+          <h2 class="section-title">Historias reales de clientes acompañados.</h2>
+        </div>
+        <div class="testimonial-marquee mt-10" aria-label="Comentarios de clientes">
+          <div class="testimonial-track">
+            {[1, 2].map(() => (
+              <>
+                <blockquote class="testimonial-card">
+                  <p>"Nos explicaron cada etapa y sentimos que había alguien cuidando la venta, no solo publicando el aviso."</p>
+                  <footer>Cliente vendedor · Lima</footer>
+                </blockquote>
+                <blockquote class="testimonial-card">
+                  <p>"El seguimiento fue claro, las visitas estuvieron filtradas y el cierre se manejó con mucha calma."</p>
+                  <footer>Propiedad vendida · Departamento</footer>
+                </blockquote>
+                <blockquote class="testimonial-card">
+                  <p>"Tuvimos información clara antes de decidir y las visitas estuvieron bien coordinadas."</p>
+                  <footer>Cliente comprador · Lima</footer>
+                </blockquote>
+                <blockquote class="testimonial-card">
+                  <p>"Nos ayudaron a ordenar documentos, precio y expectativas desde el inicio."</p>
+                  <footer>Propietario · Lima</footer>
+                </blockquote>
+              </>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-[#f3c95f] py-16">
+        <div class="mx-auto max-w-7xl px-5 lg:px-8">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-[#5c4a13]">Finca Team</p>
+            <h2 class="mt-3 text-4xl font-semibold text-[#173f2b]">Un equipo cercano para decisiones grandes.</h2>
+            <p class="mt-4 max-w-2xl leading-8 text-[#4d4320]">
+              Personas reales, seguimiento constante y comunicación simple para que vender, comprar o alquilar no se vuelva una carga.
+            </p>
+            <a class="mt-7 inline-flex rounded-full bg-[#173f2b] px-7 py-4 text-center font-semibold text-white transition hover:bg-[#255d3f]" href={whatsappUrl}>
+              Contactar al equipo
+            </a>
+          </div>
+          <div class="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {[1, 2, 3, 4].map((advisor) => (
+              <article class="advisor-card">
+                <div class="advisor-photo">
+                  <span>Asesor {advisor}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="bg-white py-20 lg:py-28">
+        <div class="mx-auto max-w-4xl px-5 lg:px-8">
+          <div class="text-center">
+            <p class="section-kicker">Q&A</p>
+            <h2 class="section-title">Preguntas antes de empezar.</h2>
+          </div>
+          <div class="mt-10 divide-y divide-[#dbe5d2] rounded-3xl border border-[#dbe5d2]">
+            {faqs.map(([question, answer]) => (
+              <details class="group p-6">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-left text-lg font-semibold">
+                  {question}
+                  <span class="grid size-8 shrink-0 place-items-center rounded-full bg-[#edf3e6] text-[#173f2b] transition group-open:rotate-45">+</span>
+                </summary>
+                <p class="mt-4 leading-8 text-[#627263]">{answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="bg-[#173f2b] py-8 text-white lg:py-10">
+        <div class="mx-auto grid max-w-7xl gap-6 px-5 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
+          <div>
+            <p class="section-kicker text-[#d8e5c9]">Contacto</p>
+            <p class="mt-3 max-w-3xl text-xl leading-8 text-white/78">
+              Cuéntanos qué quieres vender, comprar o alquilar. Finca Verde te responde con una primera orientación clara.
+            </p>
+          </div>
+          <div class="w-full max-w-xl rounded-[1.5rem] bg-white p-4 text-[#173f2b] lg:w-[520px]">
+            <a class="block rounded-full bg-[#173f2b] px-7 py-3.5 text-center font-semibold text-white transition hover:bg-[#255d3f]" href={whatsappUrl}>
+              Escribir por WhatsApp
+            </a>
+            <p class="mt-2 text-center text-sm leading-6 text-[#627263]">Atención para propietarios, compradores e inversionistas en Lima.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal hidden" data-property-modal aria-hidden="true">
+      <button class="modal-backdrop" type="button" data-modal-close aria-label="Cerrar ficha"></button>
+      <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">×</button>
+        <div class="grid gap-0 lg:grid-cols-[1fr_.9fr]">
+          <img class="h-72 w-full object-cover lg:h-full" src="" alt="" data-modal-image />
+          <div class="p-6 lg:p-8">
+            <span class="text-sm font-semibold uppercase tracking-[0.18em] text-[#6e8a63]" data-modal-district></span>
+            <h2 class="mt-3 text-3xl font-semibold text-[#173f2b]" id="modal-title" data-modal-title></h2>
+            <p class="mt-4 leading-8 text-[#627263]" data-modal-summary></p>
+            <div class="mt-6 grid grid-cols-3 gap-3 text-center text-sm">
+              <div class="rounded-2xl bg-[#edf3e6] p-3">
+                <strong class="block text-[#173f2b]" data-modal-area></strong>
+                <span class="text-[#627263]">Área</span>
+              </div>
+              <div class="rounded-2xl bg-[#edf3e6] p-3">
+                <strong class="block text-[#173f2b]" data-modal-bedrooms></strong>
+                <span class="text-[#627263]">Dorm.</span>
+              </div>
+              <div class="rounded-2xl bg-[#edf3e6] p-3">
+                <strong class="block text-[#173f2b]" data-modal-bathrooms></strong>
+                <span class="text-[#627263]">Baños</span>
+              </div>
+            </div>
+            <div class="mt-6">
+              <h3 class="font-semibold text-[#173f2b]">Puntos clave</h3>
+              <div class="mt-3 flex flex-wrap gap-2" data-modal-highlights></div>
+            </div>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a class="rounded-full bg-[#173f2b] px-6 py-3 text-center font-semibold text-white transition hover:bg-[#255d3f]" href="#" data-modal-whatsapp>
+                Consultar por WhatsApp
+              </a>
+              <button class="rounded-full border border-[#173f2b]/18 px-6 py-3 font-semibold text-[#173f2b]" type="button" data-modal-close>
+                Seguir viendo
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="bg-[#102d1f] px-5 py-8 text-sm text-white/60 lg:px-8">
+      <div class="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p>Finca Verde Inmobiliaria</p>
+        <div class="flex gap-5">
+          <a href="https://www.instagram.com/fincaverdeinmobiliaria/" class="hover:text-white">Instagram</a>
+          <a href={whatsappUrl} class="hover:text-white">WhatsApp</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="application/json" id="properties-data" set:html={JSON.stringify(properties)}></script>
+    <script type="application/json" id="process-data" set:html={JSON.stringify(process)}></script>
+
+    <script>
+      const encodeWhatsapp = (message) =>
+        `https://wa.me/51923529731?text=${encodeURIComponent(message)}`;
+
+      const audienceContent = {
+        seller: {
+          title: 'Vende tu propiedad rápido y seguro.',
+          copy: 'En Finca Verde te acompañamos desde la valorización hasta el cierre, con una gestión cercana, ordenada y enfocada en propietarios que quieren avanzar con confianza.',
+        },
+        buyer: {
+          title: 'Encuentra una propiedad con guía cercana.',
+          copy: 'Filtramos opciones, coordinamos visitas y te orientamos para comprar o alquilar con información clara antes de tomar una decisión.',
+        },
+      };
+
+      const heroTitle = document.querySelector('[data-hero-title]');
+      const heroCopy = document.querySelector('[data-hero-copy]');
+      const heroOperationTabs = [...document.querySelectorAll('[data-hero-operation]')];
+      const heroOperationTabsShell = document.querySelector('[data-hero-operation-tabs]');
+      const heroSearchSubmit = document.querySelector('[data-hero-search-submit]');
+      let selectedHeroOperation = 'tasar';
+
+      const setHeroOperation = (operation) => {
+        selectedHeroOperation = operation;
+        heroOperationTabs.forEach((item) => item.classList.toggle('is-active', item.dataset.heroOperation === operation));
+        if (heroSearchSubmit) {
+          heroSearchSubmit.textContent = selectedHeroOperation === 'tasar' ? 'Solicitar tasación' : 'Buscar propiedades';
+        }
+      };
+
+      const updateHeroOperationsForAudience = (audience) => {
+        const visibleTabs = heroOperationTabs.filter((tab) => {
+          const isVisible = tab.dataset.audienceOptions?.split(' ').includes(audience);
+          tab.classList.toggle('hidden', !isVisible);
+          return isVisible;
+        });
+
+        heroOperationTabsShell?.style.setProperty('--hero-operation-count', String(visibleTabs.length || 1));
+        heroOperationTabsShell?.classList.toggle('is-single-option', visibleTabs.length === 1);
+        if (!visibleTabs.some((tab) => tab.dataset.heroOperation === selectedHeroOperation)) {
+          setHeroOperation(visibleTabs[0]?.dataset.heroOperation || 'venta');
+          return;
+        }
+        setHeroOperation(selectedHeroOperation);
+      };
+
+      document.querySelectorAll('[data-audience]').forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+          const content = audienceContent[toggle.dataset.audience];
+          if (!content) return;
+
+          document.querySelectorAll('[data-audience]').forEach((item) => item.classList.toggle('is-active', item === toggle));
+          heroTitle.textContent = content.title;
+          heroCopy.textContent = content.copy;
+          updateHeroOperationsForAudience(toggle.dataset.audience);
+        });
+      });
+
+      updateHeroOperationsForAudience('seller');
+
+      heroOperationTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          setHeroOperation(tab.dataset.heroOperation);
+        });
+      });
+
+      const button = document.querySelector('[data-menu-button]');
+      const menu = document.querySelector('[data-menu]');
+
+      button?.addEventListener('click', () => {
+        const isOpen = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!isOpen));
+        menu?.classList.toggle('hidden');
+      });
+
+      menu?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          button?.setAttribute('aria-expanded', 'false');
+          menu.classList.add('hidden');
+        });
+      });
+
+      const properties = JSON.parse(document.querySelector('#properties-data')?.textContent || '[]');
+      const processItems = JSON.parse(document.querySelector('#process-data')?.textContent || '[]');
+
+      const filterControls = [...document.querySelectorAll('[data-property-filter]')];
+      const propertyCards = [...document.querySelectorAll('[data-property-card]')];
+      const propertyCount = document.querySelector('[data-property-count]');
+      const emptyProperties = document.querySelector('[data-empty-properties]');
+
+      const applyFilters = () => {
+        const filters = Object.fromEntries(filterControls.map((control) => [control.dataset.propertyFilter, control.value]));
+        let visible = 0;
+
+        propertyCards.forEach((card) => {
+          const matches = Object.entries(filters).every(([key, value]) => value === 'all' || card.dataset[key] === value);
+          card.classList.toggle('hidden', !matches);
+          if (matches) visible += 1;
+        });
+
+        if (propertyCount) propertyCount.textContent = String(visible);
+        emptyProperties?.classList.toggle('hidden', visible !== 0);
+      };
+
+      filterControls.forEach((control) => control.addEventListener('change', applyFilters));
+      document.querySelector('[data-hero-search-submit]')?.addEventListener('click', () => {
+        const district = document.querySelector('[data-hero-district]')?.value || 'all';
+        const type = document.querySelector('[data-hero-type]')?.value || 'all';
+
+        if (selectedHeroOperation === 'tasar') {
+          window.location.href = encodeWhatsapp(`Hola Finca Verde, quiero solicitar una tasación${district !== 'all' ? ` en ${district}` : ''}.`);
+          return;
+        }
+
+        const filterValues = {
+          operation: selectedHeroOperation,
+          district,
+          type,
+        };
+
+        filterControls.forEach((control) => {
+          const key = control.dataset.propertyFilter;
+          if (filterValues[key]) control.value = filterValues[key];
+        });
+        applyFilters();
+        document.querySelector('#propiedades')?.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      const modal = document.querySelector('[data-property-modal]');
+      const modalFields = {
+        image: document.querySelector('[data-modal-image]'),
+        district: document.querySelector('[data-modal-district]'),
+        title: document.querySelector('[data-modal-title]'),
+        summary: document.querySelector('[data-modal-summary]'),
+        area: document.querySelector('[data-modal-area]'),
+        bedrooms: document.querySelector('[data-modal-bedrooms]'),
+        bathrooms: document.querySelector('[data-modal-bathrooms]'),
+        highlights: document.querySelector('[data-modal-highlights]'),
+        whatsapp: document.querySelector('[data-modal-whatsapp]'),
+      };
+
+      const closeModal = () => {
+        modal?.classList.add('hidden');
+        modal?.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      };
+
+      const openProperty = (id) => {
+        const property = properties.find((item) => item.id === id);
+        if (!property || !modal) return;
+
+        modalFields.image.src = property.image;
+        modalFields.image.alt = property.title;
+        modalFields.district.textContent = property.district;
+        modalFields.title.textContent = property.title;
+        modalFields.summary.textContent = property.summary;
+        modalFields.area.textContent = property.area;
+        modalFields.bedrooms.textContent = property.bedrooms;
+        modalFields.bathrooms.textContent = property.bathrooms;
+        modalFields.highlights.innerHTML = property.highlights
+          .map((item) => `<span class="rounded-full bg-[#edf3e6] px-3 py-1 text-sm font-semibold text-[#40573f]">${item}</span>`)
+          .join('');
+        modalFields.whatsapp.href = encodeWhatsapp(`Hola Finca Verde, quiero información sobre ${property.title} en ${property.district}.`);
+
+        modal.classList.remove('hidden');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+      };
+
+      document.querySelectorAll('[data-property-open]').forEach((trigger) => {
+        trigger.addEventListener('click', () => openProperty(trigger.dataset.propertyOpen));
+      });
+      document.querySelectorAll('[data-modal-close]').forEach((trigger) => trigger.addEventListener('click', closeModal));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeModal();
+      });
+
+      const processTabs = [...document.querySelectorAll('[data-process-tab]')];
+      const processPanel = {
+        detail: document.querySelector('[data-process-detail]'),
+        deliverables: document.querySelector('[data-process-deliverables]'),
+      };
+
+      processTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const item = processItems[Number(tab.dataset.processTab)];
+          if (!item) return;
+
+          processTabs.forEach((otherTab) => {
+            const active = otherTab === tab;
+            otherTab.classList.toggle('is-active', active);
+            otherTab.setAttribute('aria-selected', String(active));
+          });
+
+          processPanel.detail.textContent = item.detail;
+          processPanel.deliverables.innerHTML = item.deliverables
+            .map((deliverable) => `<span class="process-deliverable grid place-items-center rounded-2xl bg-[#edf3e6] px-4 py-2.5 text-center text-sm font-semibold leading-tight">${deliverable}</span>`)
+            .join('');
+        });
+      });
+
+      const revealItems = [...document.querySelectorAll('[data-reveal]')];
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+      revealItems.forEach((item) => revealObserver.observe(item));
+    </script>
+  </body>
+</html>
